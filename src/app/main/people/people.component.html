@@ -1,0 +1,17 @@
+<mat-card>
+    <mat-card-title>
+        People
+    </mat-card-title>
+    <mat-card-content>
+        <ng-container *ngIf="(people$ | async) as people ; else noPerson">
+            <mat-list>
+                <mat-list-item *ngFor="let p of people">
+                    Name: {{p.name}} - Email: {{p.email}}
+                </mat-list-item>
+            </mat-list>
+        </ng-container>
+        <ng-template #noPerson>
+            <p>There's no registered person</p>
+        </ng-template>
+    </mat-card-content>
+</mat-card>
