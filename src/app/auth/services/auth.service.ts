@@ -31,7 +31,7 @@ export class AuthService {
   isAuthenticated(): Observable<boolean> {
     const token = localStorage.getItem('token')
     if(token && !this.subjLoggedIn$.value){
-      this.checkTokenValidation()
+      return this.checkTokenValidation()
     }
     return this.subjLoggedIn$.asObservable()
   }
@@ -46,9 +46,7 @@ export class AuthService {
           this.subjUser$.next({} as User)
         }
       }),
-      map((user: User) => {
-        return user ? true : false
-      }),
+      map((user: User) => user ? true : false ),
       catchError((error) => {
         this.logout()
         return of(false)
